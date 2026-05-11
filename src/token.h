@@ -1,56 +1,56 @@
 #pragma once
 #include <string>
 
-enum TokenKind {
-    TOK_EOF = -1, // end of file
+enum class TokenKind {
+    EOF_TOKEN = -1, // end of file
 
     // keywords
-    TOK_KERNEL      = -2,   // 'kernel definition keyword'
-    TOK_IF          = -3,
-    TOK_ELSE        = -4,
-    TOK_FOR         = -5,
-    TOK_RETURN      = -6,
+    KERNEL      = -2,   // 'kernel definition keyword'
+    IF          = -3,
+    ELSE        = -4,
+    FOR         = -5,
+    RETURN      = -6,
 
     // types - int-32, int-64, float-32, float-64
-    TOK_I32         = -7,
-    TOK_I64         = -8,
-    TOK_F32         = -9,
-    TOK_F64         = -10,
-    TOK_PTR         = -11,   // pointer type for GPU memory
+    I32         = -7,
+    I64         = -8,
+    F32         = -9,
+    F64         = -10,
+    PTR         = -11,   // pointer type for GPU memory
 
     // literals
-    TOK_INT_LIT     = -12,
-    TOK_FLOAT_LIT   = -13,
+    INT_LIT     = -12,
+    FLOAT_LIT   = -13,
 
     // identifier
-    TOK_IDENTIFIER  = -14,
+    IDENTIFIER  = -14,
 
     // symbols
-    TOK_LPAREN      = -15,   // (
-    TOK_RPAREN      = -16,   // )
-    TOK_LBRACE      = -17,   // {
-    TOK_RBRACE      = -18,   // }
-    TOK_LBRACKET    = -19,   // [
-    TOK_RBRACKET    = -20,   // ]
-    TOK_COMMA       = -21,   // ,
-    TOK_COLON       = -22,   // :
-    TOK_SEMICOLON   = -23,  // ;
-    TOK_ASSIGN      = -24,  // =
-    TOK_PLUS        = -25,  // +
-    TOK_MINUS       = -26,  // -
-    TOK_STAR        = -27,  // *
-    TOK_SLASH       = -28,  // /
-    TOK_LT          = -29,  // <
-    TOK_GT          = -30,  // >
-    TOK_EQ          = -31,  // ==
-    TOK_NEQ         = -32,  // !=
-    TOK_LEQ         = -33,  // <=
-    TOK_GEQ         = -34,  // >=
-    TOK_AMP         = -35,  // &
-    TOK_PIPE        = -36,  // |
-    TOK_CARET       = -37,  // ^ 
-    TOK_RSHIFT      = -38,  // >>
-    TOK_LSHIFT      = -39,  // <<
+    LPAREN      = -15,   // (
+    RPAREN      = -16,   // )
+    LBRACE      = -17,   // {
+    RBRACE      = -18,   // }
+    LBRACKET    = -19,   // [
+    RBRACKET    = -20,   // ]
+    COMMA       = -21,   // ,
+    COLON       = -22,   // :
+    SEMICOLON   = -23,  // ;
+    ASSIGN      = -24,  // =
+    PLUS        = -25,  // +
+    MINUS       = -26,  // -
+    STAR        = -27,  // *
+    SLASH       = -28,  // /
+    LT          = -29,  // <
+    GT          = -30,  // >
+    EQ          = -31,  // ==
+    NEQ         = -32,  // !=
+    LEQ         = -33,  // <=
+    GEQ         = -34,  // >=
+    AMP         = -35,  // &
+    PIPE        = -36,  // |
+    CARET       = -37,  // ^ 
+    RSHIFT      = -38,  // >>
+    LSHIFT      = -39,  // <<
 };
 
 struct Token {
@@ -63,3 +63,49 @@ struct Token {
     int64_t int_val;
     double float_val;
 };
+
+// helper function to convert token kind to string for error messages
+inline std::string token_kind_str(TokenKind kind) {
+    switch (kind) {
+        case TokenKind::EOF_TOKEN:  return "EOF";
+        case TokenKind::KERNEL:     return "kernel";
+        case TokenKind::IF:         return "if";
+        case TokenKind::ELSE:       return "else";
+        case TokenKind::FOR:        return "for";
+        case TokenKind::RETURN:     return "return";
+        case TokenKind::I32:        return "i32";
+        case TokenKind::I64:        return "i64";
+        case TokenKind::F32:        return "f32";
+        case TokenKind::F64:        return "f64";
+        case TokenKind::PTR:        return "ptr";
+        case TokenKind::INT_LIT:    return "int literal";
+        case TokenKind::FLOAT_LIT:  return "float literal";
+        case TokenKind::IDENTIFIER: return "identifier";
+        case TokenKind::LPAREN:     return "(";
+        case TokenKind::RPAREN:     return ")";
+        case TokenKind::LBRACE:     return "{";
+        case TokenKind::RBRACE:     return "}";
+        case TokenKind::LBRACKET:   return "[";
+        case TokenKind::RBRACKET:   return "]";
+        case TokenKind::COMMA:      return ",";
+        case TokenKind::COLON:      return ":";
+        case TokenKind::SEMICOLON:  return ";";
+        case TokenKind::ASSIGN:     return "=";
+        case TokenKind::PLUS:       return "+";
+        case TokenKind::MINUS:      return "-";
+        case TokenKind::STAR:       return "*";
+        case TokenKind::SLASH:      return "/";
+        case TokenKind::LT:         return "<";
+        case TokenKind::GT:         return ">";
+        case TokenKind::EQ:         return "==";
+        case TokenKind::NEQ:        return "!=";
+        case TokenKind::LEQ:        return "<=";
+        case TokenKind::GEQ:        return ">=";
+        case TokenKind::AMP:        return "&";
+        case TokenKind::PIPE:       return "|";
+        case TokenKind::CARET:      return "^";
+        case TokenKind::RSHIFT:     return ">>";
+        case TokenKind::LSHIFT:     return "<<";
+        default:                    return "unknown";
+    }
+}
