@@ -193,11 +193,11 @@ Token Lexer::lex_symbol() {
             return make_token(TokenKind::GT, ">");
 
         default: {
-            std::string msg = "unexpected character '";
-            msg += c;
-            msg += "'";
+            std::string msg = "krnlcc: error at line " + std::to_string(line_) +
+                              ", col " + std::to_string(col_) +
+                              ": unexpected character '" + c + "'";
             throw std::runtime_error(msg);
-        }
+}
     }
 }
 
