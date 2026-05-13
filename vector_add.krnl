@@ -1,0 +1,6 @@
+kernel vector_add(out: ptr<f32>, a: ptr<f32>, b: ptr<f32>, n: i32) {
+    i: i32 = thread_id();
+    if i < n {
+        out[i] = a[i] + b[i];
+    }
+}

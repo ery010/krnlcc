@@ -11,7 +11,7 @@ public:
     // main interface
     Token next();       // consume and return next token
     Token peek();       // look at next token without consuming
-    bool at_end() const;
+    bool at_eof() const;
 
 private:
     std::string source_;
