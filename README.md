@@ -1,2 +1,2 @@
 # krnlcc
-krnlcc - A Custom GPU Kernel to PTX Compiler
+krnlcc - A Custom GPU Language to PTX Compiler
