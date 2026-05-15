@@ -2,61 +2,61 @@
 #include <string>
 
 enum class TokenKind {
-    EOF_TOKEN = -1, // end of file
+    EOF_TOKEN, // end of file
 
     // keywords
-    KERNEL      = -2,   // 'kernel definition keyword'
-    IF          = -3,
-    ELSE        = -4,
-    FOR         = -5,
-    RETURN      = -6,
+    KERNEL,     // 'kernel definition keyword'
+    IF,
+    ELSE,
+    FOR,
+    RETURN,
 
     // types - int-32, int-64, float-32, float-64
-    I32         = -7,
-    I64         = -8,
-    F32         = -9,
-    F64         = -10,
-    PTR         = -11,   // pointer type for GPU memory
+    I32,
+    I64,
+    F32,
+    F64,
+    PTR,        // pointer type for GPU memory
 
     // literals
-    INT_LIT     = -12,
-    FLOAT_LIT   = -13,
+    INT_LIT,
+    FLOAT_LIT,
 
     // identifier
-    IDENTIFIER  = -14,
+    IDENTIFIER,
 
     // symbols
-    LPAREN      = -15,   // (
-    RPAREN      = -16,   // )
-    LBRACE      = -17,   // {
-    RBRACE      = -18,   // }
-    LBRACKET    = -19,   // [
-    RBRACKET    = -20,   // ]
-    COMMA       = -21,   // ,
-    COLON       = -22,   // :
-    SEMICOLON   = -23,  // ;
-    ASSIGN      = -24,  // =
-    PLUS        = -25,  // +
-    MINUS       = -26,  // -
-    STAR        = -27,  // *
-    SLASH       = -28,  // /
-    LT          = -29,  // <
-    GT          = -30,  // >
-    EQ          = -31,  // ==
-    NEQ         = -32,  // !=
-    LEQ         = -33,  // <=
-    GEQ         = -34,  // >=
-    AMP         = -35,  // &
-    PIPE        = -36,  // |
-    CARET       = -37,  // ^ 
-    RSHIFT      = -38,  // >>
-    LSHIFT      = -39,  // <<
+    LPAREN,     // (
+    RPAREN,     // )
+    LBRACE,     // {
+    RBRACE,     // }
+    LBRACKET,   // [
+    RBRACKET,   // ]
+    COMMA,      // ,
+    COLON,      // :
+    SEMICOLON,  // ;
+    ASSIGN,     // =
+    PLUS ,      // +
+    MINUS,      // -
+    STAR,       // *
+    SLASH,      // /
+    LT,         // <
+    GT,         // >
+    EQ,         // ==
+    NEQ,        // !=
+    LEQ,        // <=
+    GEQ,        // >=
+    AMP,        // &
+    PIPE,       // |
+    CARET,      // ^ 
+    RSHIFT,     // >>
+    LSHIFT,     // <<
 };
 
 struct Token {
     TokenKind kind;
     std::string text;       // text from source
-    int line;               // error messages
+    int line;               // line and col for error messages
     int col;
 
     // literal values
