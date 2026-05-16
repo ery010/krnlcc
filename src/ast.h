@@ -30,16 +30,41 @@ struct StmtNode {
 
 // Expr nodes
 
-struct IntLitExpr : ExprNode {
+struct IntLitExprNode : ExprNode {
     int64_t value;
 };
 
-struct FloatLitExpr : ExprNode {
+struct FloatLitExprNode : ExprNode {
     double value;
 };
 
-struct VarExpr : ExprNode {
+struct VarExprNode : ExprNode {
     std::string name;
+};
+
+struct BinaryExprNode : ExprNode {
+    std::string op;
+    std::unique_ptr<ExprNode> left;
+    std::unique_ptr<ExprNode> right;
+};
+
+// keys[i]
+struct IndexExprNode : ExprNode {
+    std::unique_ptr<ExprNode> array;
+    std::unique_ptr<ExprNode> index;
+};
+
+// thread_id()
+struct CallExprNode : ExprNode {
+    std::string name;
+    std::vector<std::unique_ptr<ExprNode>> args;
+};
+
+// Statement nodes
+struct DeclVarStmtNode : StmtNode {
+    std::string name;
+    Type type;
+    std::unique_ptr<ExprNode> init;
 };
 
 
