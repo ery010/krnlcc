@@ -37,7 +37,7 @@ enum class TokenKind {
     COLON,      // :
     SEMICOLON,  // ;
     ASSIGN,     // =
-    PLUS,      // +
+    PLUS,       // +
     MINUS,      // -
     STAR,       // *
     SLASH,      // /
@@ -55,14 +55,14 @@ enum class TokenKind {
 };
 
 struct Token {
-    TokenKind kind;
-    std::string text;       // text from source
-    int line;               // line and col for error messages
-    int col;
+    TokenKind   kind        = TokenKind::EOF_TOKEN;
+    std::string text;                                   // text from source
+    int         line        = 0;                        // line and col for error messages
+    int         col         = 0;
 
     // literal values
-    int64_t int_val;
-    double float_val;
+    int64_t     int_val     = 0;
+    double      float_val   = 0.0;
 };
 
 // helper function to convert token kind to string for error messages
