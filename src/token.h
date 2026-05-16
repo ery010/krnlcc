@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cstdint>
 
 enum class TokenKind {
     EOF_TOKEN, // end of file
