@@ -2,6 +2,23 @@
 #include <cctype>
 #include <stdexcept>
 
+// safe wrappers for unsigned char casts
+static bool is_alpha(char c) {
+    return std::isalpha(static_cast<unsigned char>(c));
+}
+
+static bool is_digit(char c) {
+    return std::isdigit(static_cast<unsigned char>(c));
+}
+
+static bool is_alnum(char c) {
+    return std::isalnum(static_cast<unsigned char>(c));
+}
+
+static bool is_space(char c) {
+    return std::isspace(static_cast<unsigned char>(c));
+}
+
 Lexer::Lexer(const std::string& source)
     : source_(source) {}
 
@@ -60,7 +77,7 @@ void Lexer::skip_whitespace_and_comments() {
         char c = current();
 
         // if whitespace
-        if (std::isspace(c)) {
+        if (is_space(c)) {
             advance();
             continue;
         }
@@ -83,20 +100,28 @@ Token Lexer::next_token() {
     if (at_eof())
         return make_token(TokenKind::EOF_TOKEN, "");
 
+    int start_line = line_;
+    int start_col = col_;
+
     char c = current();
 
-    if (std::isalpha(c) || c == '_')
-        return lex_identifier_or_keyword();
+    Token t;
+    if (is_alpha(c) || c == '_') {
+        t = lex_identifier_or_keyword();
+    } else if (is_digit(c)) {
+        t = lex_number();
+    } else {
+        t = lex_symbol();
+    }
 
-    if (std::isdigit(c))
-        return lex_number();
-
-    return lex_symbol();
+    t.line = start_line;
+    t.col = start_col;
+    return t;
 }
 
 Token Lexer::lex_identifier_or_keyword() {
     std::string text;
-    while (!at_eof() && (std::isalnum(current()) || current() == '_'))
+    while (!at_eof() && (is_alnum(current()) || current() == '_'))
         text += advance();
 
     // keyword matching
@@ -118,14 +143,14 @@ Token Lexer::lex_number() {
     std::string text;
     bool is_float = false;
 
-    while (!at_eof() && std::isdigit(current()))
+    while (!at_eof() && is_digit(current()))
         text += advance();
 
     // check for decimal point
-    if (!at_eof() && current() == '.' && std::isdigit(peek_char())) {
+    if (!at_eof() && current() == '.' && is_digit(peek_char())) {
         is_float = true;
         text += advance(); // consume '.'
-        while (!at_eof() && std::isdigit(current()))
+        while (!at_eof() && is_digit(current()))
             text += advance();
     }
 
@@ -197,7 +222,7 @@ Token Lexer::lex_symbol() {
                               ", col " + std::to_string(col_) +
                               ": unexpected character '" + c + "'";
             throw std::runtime_error(msg);
-}
+        }
     }
 }
 

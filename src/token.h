@@ -36,7 +36,7 @@ enum class TokenKind {
     COLON,      // :
     SEMICOLON,  // ;
     ASSIGN,     // =
-    PLUS ,      // +
+    PLUS,      // +
     MINUS,      // -
     STAR,       // *
     SLASH,      // /
