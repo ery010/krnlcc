@@ -61,6 +61,7 @@ struct CallExprNode : ExprNode {
 };
 
 // Statement nodes
+
 struct DeclVarStmtNode : StmtNode {
     std::string name;
     Type type;
