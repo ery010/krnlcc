@@ -4,8 +4,6 @@
 
 **KRNL** is a hobby programming language designed to write simple GPU kernels (i.e. ```vector_add.krnl```).
 
----
-
 ## Implementation Progress
 
 ### Frontend
@@ -32,5 +30,3 @@
 - [ ] Error messages with line and column
 - [ ] README benchmark results
 - [ ] Nsight Compute profiling comparison vs nvcc
-
----
