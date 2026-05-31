@@ -1,4 +1,4 @@
-# krnlcc - Custom GPU-oriented DSL to PTX Assembly Compiler
+# krnlcc - Custom GPU Language to PTX Assembly Compiler
 
 **krnlcc** is a compiler for the custom programming language **KRNL**. This is mainly a project for learning about compilers, specifically GPU programming language to PTX assembly.
 
